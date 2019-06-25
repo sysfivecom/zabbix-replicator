@@ -1,0 +1,50 @@
+{
+	"primary": {
+		"url": "http://server1",
+		"user": "zbxapi_readonly",
+		"password": "zabbix"
+	},
+	"replica": {
+		"url": "http://server2",
+		"user": "zbxapi_write",
+		"password": "zabbix",
+		"ip": "127.0.0.1",
+		"port": "10051"
+	},
+	"groups": [{"groupid": "2"}],
+	"interfaces": [{
+		"type": "1",
+		"main": "1",
+	        "useip": "1",
+		"ip": "127.0.0.1",
+		"dns": "",
+		"port": "10050"
+	}],
+	"timestamp_item": {
+		"key_": "replication.timestamp",
+		"name": "replication.timestamp",
+		"type": 2,
+		"value_type": 3,
+		"description": "This item holds the timestamp for the Zabbix Server-Server Replication",
+		"history": "7d",
+		"status": 0,
+		"trends": "7d"
+	},
+	"timestamp_trigger": {
+		"comments": "This trigger exists to monitor if the server-server replication is working",
+		"description": "No Zabbix Replication Data received for {HOST.NAME}",
+		"expression": "{HOSTNAME:replication.timestamp.nodata(300s)}=1",
+		"priority": 4,
+		"status": 0,
+		"type": 0,
+		"recovery_mode": 0,
+		"recovery_expression": "",
+		"correlation_mode": 0,
+		"manual_close": 0
+	},
+	"replication_hosts": [
+	       	"examplehost"
+	],
+	"initial_history": 86400,
+	"map_dir": "/var/lib/zabbix/replica"
+}
